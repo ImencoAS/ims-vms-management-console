@@ -1,8 +1,8 @@
 # change the base version when install new ams version
-DOCKER_IMAGE_AMS_BASE?=imenco/antmediaserver-base:2.6.4
+DOCKER_IMAGE_AMS_BASE?=imenco/antmediaserver-base:2.7.0
 DOCKER_IMAGE_AMS?=imenco/antmediaserver:latest
 
-AMS_VERSION?=ant-media-server-enterprise-2.6.4-20230827_1351.zip
+AMS_VERSION?=ant-media-server-enterprise-2.7.0-20231031_0626.zip
 
 .PHONY: build-docker-base 
 build-docker-base:
