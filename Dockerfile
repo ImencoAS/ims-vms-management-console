@@ -6,7 +6,10 @@ FROM imenco/antmediaserver-base:2.5.3
 WORKDIR /tmp
 COPY . vms-management-console/
 WORKDIR /tmp/vms-management-console
-RUN rsync -av --exclude='.git/' ${PWD}/ /usr/local/antmedia/webapps
+# RUN rsync -av --exclude='.git/' ${PWD}/ /usr/local/antmedia/webapps
+WORKDIR /tmp/vms-management-console/.build
+# RUN rsync -av ${PWD}/.build /usr/local/antmedia/webapps
+RUN rsync -avl . /usr/local/antmedia/webapps
 
 EXPOSE 5080 5443
 
