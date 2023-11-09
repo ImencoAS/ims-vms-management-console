@@ -49,6 +49,25 @@ To package the build files, use this command:
   npm run package
 ```
 
+## Making changes to IMS VMS Management Console
+There are a couple different scenarios when editing the IMS VMS Management Console
+### Updating AMS Version
+When updating the AMS version, follow the steps below:
+1. Make sure you've followed and installed all prerequisites 
+1. Make sure you have make installed
+1. Download the release from www.antmedia.io and place it in the IMS VMS root folder on your local machine
+1. Open Makefile and change `DOCKER_IMAGE_AMS_BASE?=imenco/antmediaserver-base:<VERSION, e.x 2.7.0>` and `AMS_VERSION?=<filename.zip, e.x ant-media-server-enterprise-2.7.0-20231031_0626.zip>` to the correct values. 
+1. Open Dockerfile and change line `FROM imenco/antmediaserver-base:<VERSION, e.x 2.7.0>`
+1. Run `make docker-build-push-vms`
+1. Deploy from JFrog
+
+### Making changes to the console
+If you make changes to the IMS VMS Management Console without updating the AMS version, you can do the following:
+1. Make sure you've followed and installed all prerequisites 
+1. Make sure you have make installed
+1. Run `make build-vms push-docker`
+1. Deploy from JFrog
+
 This will create a .zip file that can be uploaded as a release to GitHub 
 
 Info about CSS. CSS is handled by GULP, wich you can read more about here: https://gulpjs.com/
