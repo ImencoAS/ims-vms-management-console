@@ -7,14 +7,14 @@
 
 </head>
 
-<body>
+<body style="background-color: transparent;">
 
 	<div id='video-overlay'>
 		<img src="images/loading.gif" alt="loading image" />
 	</div>
 
-	<div id="video_info">
-		Your live stream will play automatically as soon as it's available. <br />Get ready to be part of the action!
+	<div id="video_info" style="display: none;">
+		<!-- Your live stream will play automatically as soon as it's available. <br />Get ready to be part of the action! -->
 		<!--
 		<div>
 			<img id="logo" src="images/logo.png" />
@@ -23,10 +23,18 @@
 	</div>
 
 	<div id="video_container">
-		<video id='video-player' class='video-js vjs-default-skin vjs-big-play-centered' controls playsinline></video>
+		<!-- <video id='video-player' class='video-js vjs-default-skin vjs-big-play-centered' controls playsinline></video> -->
+		<video id='video-player' class='video-js vjs-default-skin vjs-big-play-centered' playsinline></video> <!-- Hide controls -->
+		
+		<div id="videoPausedOverlay" style="display: none;" >
+			<img id="pauseIcon" src="images/icons/pause.svg" style="z-index: 2; width: 15%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>
+			<!-- <span style="z-index: 2; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); color: white;"> Video Paused - Right Click => "Play" to unpause</span> -->
+			<div style="opacity:50%; background-color: transparent; z-index: 1; position: absolute; top: 0; left: 0; overflow: hidden; height: 100% !important; width: 100% !important; "> </div>
+		</div>
 	</div>
 
-	<div id="networkWarning">Your connection isn't fast enough to play this stream!</div>
+	<!-- <div id="networkWarning">Your connection isn't fast enough to play this stream!</div> -->
+	<div id="networkWarning"></div> <!-- Remove slow network warning -->
 	<img id="play_button" src="images/play.png" onclick="playWebRTCVideo()"
 	style="position: absolute; top: 30px; left: 30px; display: none;" />
 
