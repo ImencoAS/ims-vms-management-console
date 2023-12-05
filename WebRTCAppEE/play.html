@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Ant Media Server WebRTC/HLS/DASH Player</title>
+	<title>Imenco Web Player</title>
 	<link href="css/player.css" rel="stylesheet">
 
 </head>
@@ -14,7 +15,7 @@
 	</div>
 
 	<div id="video_info" style="display: none;">
-		<!-- Your live stream will play automatically as soon as it's available. <br />Get ready to be part of the action! -->
+		<!--		Your live stream will play automatically as soon as it's available. <br />Get ready to be part of the action! -->
 		<!--
 		<div>
 			<img id="logo" src="images/logo.png" />
@@ -23,13 +24,15 @@
 	</div>
 
 	<div id="video_container">
-		<!-- <video id='video-player' class='video-js vjs-default-skin vjs-big-play-centered' controls playsinline></video> -->
-		<video id='video-player' class='video-js vjs-default-skin vjs-big-play-centered' playsinline></video> <!-- Hide controls -->
-		
-		<div id="videoPausedOverlay" style="display: none;" >
-			<img id="pauseIcon" src="images/icons/pause.svg" style="z-index: 2; width: 15%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>
-			<!-- <span style="z-index: 2; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); color: white;"> Video Paused - Right Click => "Play" to unpause</span> -->
-			<div style="opacity:50%; background-color: transparent; z-index: 1; position: absolute; top: 0; left: 0; overflow: hidden; height: 100% !important; width: 100% !important; "> </div>
+
+	</div>
+
+	<div id="videoPausedOverlay" style="display: none;">
+		<img id="pauseIcon" src="images/icons/pause.svg"
+			style="z-index: 2; width: 15%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
+		<!-- <span style="z-index: 2; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); color: white;"> Video Paused - Right Click => "Play" to unpause</span> -->
+		<div
+			style="opacity:50%; background-color: transparent; z-index: 1; position: absolute; top: 0; left: 0; overflow: hidden; height: 100% !important; width: 100% !important; ">
 		</div>
 	</div>
 
@@ -61,14 +64,14 @@
 		* It support vod playback directly from name of the file. Just give the stream id having a prefix with streams folder
 		* streams/test.mp4
 		*/
-		import { EmbeddedPlayer } from "./js/embedded-player.js";
+
+		import { EmbeddedPlayer } from "./imenco-js/embedded-player.js";
 
 		var embeddedPlayer = new EmbeddedPlayer(window, document.getElementById("video_container"), document.getElementById("video_info"));
 
 		window.addEventListener("load", () => {
 			embeddedPlayer.play();
-        });
-
+		});
 
 
 		embeddedPlayer.addWebRTCDataListener((data) => {
@@ -77,9 +80,21 @@
 
 		window.embeddedPlayer = embeddedPlayer;
 
+		//* Add play and pause event listeners to the window object */
+		window.addEventListener("message", ({ data }) => {
+			if (data.msg === "pause" && data.streamID === embeddedPlayer.streamId) {
+				embeddedPlayer.pauseStream();
+				document.getElementById("videoPausedOverlay").style.display = "block";
+			}
+			if (data.msg === "play" && data.streamID === embeddedPlayer.streamId) {
+				embeddedPlayer.resumeStream();
+				document.getElementById("videoPausedOverlay").style.display = "none";
+			}
+		}, false);
+
 
 		// Mute/Unmute Video Button for 360 playback
-		document.getElementById("unmuteButton").addEventListener("click", function() {
+		document.getElementById("unmuteButton").addEventListener("click", function () {
 			if (embeddedPlayer.isMuted()) {
 				embeddedPlayer.mutePlayer(false);
 				document.getElementById("unmuteButton").innerHTML = "Mute";
