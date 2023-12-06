@@ -55,7 +55,7 @@ There are a couple different scenarios when editing the IMS VMS Management Conso
 
 PS! You will need to have make and ng installed.
 To install make run `choco install make` - you can get chocolatey from here: https://chocolatey.org/install
-To install ng run `npm install -g @angular/cli`
+
 
 When updating the AMS version, follow the steps below:
 1. Make sure you've followed and installed all prerequisites 
