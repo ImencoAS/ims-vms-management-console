@@ -52,6 +52,11 @@ To package the build files, use this command:
 ## Making changes to IMS VMS Management Console
 There are a couple different scenarios when editing the IMS VMS Management Console
 ### Updating AMS Version
+
+PS! You will need to have both make and ng installed.
+To install make run `choco install make` - you can get chocolatey from here: https://chocolatey.org/install
+To install ng run `npm install -g @angular/cli`
+
 When updating the AMS version, follow the steps below:
 1. Make sure you've followed and installed all prerequisites 
 1. Make sure you have make installed
