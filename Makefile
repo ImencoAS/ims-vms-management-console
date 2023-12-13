@@ -28,7 +28,7 @@ build-push-docker: build-docker push-docker
 
 .PHONY: build-vms
 build-vms:
-	cd root && ng build --output-path ../.build/root && cd .. && xcopy /E /I /Y /H .\WebRTCAppEE\* .\.build\WebRTCAppEE
+	cd root && npm i && ng build --output-path ../.build/root && cd .. && xcopy /E /I /Y /H .\WebRTCAppEE\* .\.build\WebRTCAppEE
 
 .PHONY: docker-build-push-vms
 build-push-vms: build-vms docker-build-push
