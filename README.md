@@ -35,7 +35,21 @@ To run the web interface locally, use this command:
 ```
 
 You might want to update the endpoint to a server running Ant Media Server to be able to login.
-That is done in: TBA
+That is done in: `rest.service.ts`
+
+```js
+        }
+        if (location.port == "4200")
+        {
+            //if it is angular development
+            HTTP_SERVER_ROOT = "//" + location.hostname + ":5080/"; //CHANGE THIS TO THE IP OF THE SERVER: HTTP_SERVER_ROOT = "//" + "10.2.34.176" + ":5080/"
+        }
+        else if (location.protocol.startsWith("https")){
+            HTTP_SERVER_ROOT = "https://" + location.hostname + ":" + location.port + "/";
+        }
+```
+
+
 
 To build the project, use this command:
 
