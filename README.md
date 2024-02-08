@@ -28,6 +28,11 @@ npm install -g @angular/cli@10.0.5
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+You will need Node version 16 for this to work.
+I recommend using [nvm](https://github.com/nvm-sh/nvm)
+
+Then you simply can write `nvm use 16`
+
 To run the web interface locally, use this command:
 
 ```sh
