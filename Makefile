@@ -24,11 +24,11 @@ push-docker-base: build-docker-base
 	docker buildx build -t $(DOCKER_IMAGE_AMS_BASE) --build-arg AntMediaServer=$(AMS_VERSION) -f Dockerfile.base --platform=linux/amd64 --push .
 
 .PHONY: docker-build-push
-build-push-docker: build-docker push-docker
+docker-build-push: build-docker push-docker
 
 .PHONY: build-vms
 build-vms:
 	cd root && npm i && ng build --output-path ../.build/root && cd .. && xcopy /E /I /Y /H .\WebRTCAppEE\* .\.build\WebRTCAppEE
 
-.PHONY: docker-build-push-vms
+.PHONY: build-push-vms
 build-push-vms: build-vms docker-build-push
