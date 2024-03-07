@@ -1,8 +1,8 @@
 # change the base version when install new ams version
-DOCKER_IMAGE_AMS_BASE?=imenco/antmediaserver-base:2.5.3
-DOCKER_IMAGE_AMS?=antmediaserver:latest
+DOCKER_IMAGE_AMS_BASE?=imenco/antmediaserver-base:2.7.0
+DOCKER_IMAGE_AMS?=imenco/antmediaserver:latest
 
-AMS_VERSION?=ant-media-server-enterprise-2.5.3-20230107_0851.zip
+AMS_VERSION?=ant-media-server-enterprise-2.7.0-20231031_0626.zip
 
 .PHONY: build-docker-base 
 build-docker-base:
@@ -24,6 +24,11 @@ push-docker-base: build-docker-base
 	docker buildx build -t $(DOCKER_IMAGE_AMS_BASE) --build-arg AntMediaServer=$(AMS_VERSION) -f Dockerfile.base --platform=linux/amd64 --push .
 
 .PHONY: docker-build-push
-build-push-docker: build-docker push-docker
+docker-build-push: build-docker push-docker
 
+.PHONY: build-vms
+build-vms:
+	cd root && npm i && ng build --output-path ../.build/root && cd .. && xcopy /E /I /Y /H .\WebRTCAppEE\* .\.build\WebRTCAppEE
 
+.PHONY: build-push-vms
+build-push-vms: build-vms docker-build-push
